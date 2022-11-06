@@ -7,19 +7,16 @@
 
 🎓 **Level** Beginner to Intermediate
 
-
 ![](images/splash.png)
 
 > [🔖 Accessing HANDS-ON](#-start-hands-on)
 
 ## 📋 Table of contents
 
-- [Setup - Initialize your environment](#setup---initialize-your-environment)
-- [LAB1 - First CQL Queries](#lab1-first-cql-queries)
-- [LAB2 - Pulsar functions](#lab2---pulsar-functions)
-- [LAB3 - Working with Database](#lab3---working-with-databases)
-- [LAB4 - Pulsar I/O](#lab4---pulsar-io)
-- [Homework](#Homework)
+- [LAB1 - Initialize your environment](#setup---initialize-your-environment)
+- [LAB2 - First CQL Queries](#lab2-first-cql-queries)
+- [LAB3 - Data Modeling](#lab3-datamodel)
+- [LAB4 - Coding](#lab3---coding)
 <p>
 
 # 🏁 Start Hands-on
