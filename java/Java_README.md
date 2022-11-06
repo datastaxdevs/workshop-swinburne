@@ -9,11 +9,13 @@ You will be running the following steps from the command line.
 
 ### Setup
 
-First (in the GitPod terminal), do `source .env` to set environment variables for your app.
+First (in the GitPod terminal), do `source .env` to set environment variables for your app. Then package the project.
 
-Next `cd java`.
-
-Execute a `mvn clean install` to bring in the dependent packages and build everything.
+```
+source .env
+cd java
+mvn clean install
+```
 
 The connection classes are `AstraConnection.java` and `CassandraConnection.java`.  The `AstraConnection` class extends the `CassandraConnection` super class, accounting for the Astra DB environment variables.  Take a minute to give those a look:
  - [AstraConnection](src/main/java/astraconnect/AstraConnection.java)

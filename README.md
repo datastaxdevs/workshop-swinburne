@@ -16,7 +16,7 @@
 - [LAB1 - Initialize your environment](#lab1---initialize-your-environment)
 - [LAB2 - First CQL Queries](#lab2-first-cql-queries)
 - [LAB3 - Data Modeling](#lab3-datamodel)
-- [LAB4 - Coding](#lab3---coding)
+- [LAB4 - Coding](#lab4-coding-java-and-python)
 <p>
 
 # 🏁 Start Hands-on
