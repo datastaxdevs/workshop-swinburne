@@ -13,7 +13,7 @@
 
 ## 📋 Table of contents
 
-- [LAB1 - Initialize your environment](#setup---initialize-your-environment)
+- [LAB1 - Initialize your environment](#lab1---initialize-your-environment)
 - [LAB2 - First CQL Queries](#lab2-first-cql-queries)
 - [LAB3 - Data Modeling](#lab3-datamodel)
 - [LAB4 - Coding](#lab3---coding)
@@ -21,7 +21,7 @@
 
 # 🏁 Start Hands-on
 
-## Setup - Initialize your environment
+## LAB1 - Initialize your environment
 
 #### `✅.setup-01`- Create your Astra Account: 
 
@@ -134,7 +134,7 @@ astra db get workshops
 
 *Congratulations your environment is all set, let's start the labs !*
 
-## LAB1. First CQL Queries
+## LAB2. First CQL Queries
 
 #### ✅ Launch the initialization script
 
@@ -356,7 +356,7 @@ WHERE sensor='s1002';
 
 Suprise !
 
-## LAB2. DataModel
+## LAB3. DataModel
 
 ```sql
 CREATE TABLE IF NOT EXISTS networks (
