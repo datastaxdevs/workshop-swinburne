@@ -34,31 +34,28 @@
 
 ## Setup - Initialize your environment
 
-#### `✅.setup-01`- Open Gitpod
-
-Gitpod is an IDE based on VSCode deployed in the cloud.
-
-
-> ↗️ _Right Click and select open as a new Tab..._
-
-<a href="https://gitpod.io/#https://github.com/datastaxdevs/workshop-swinburne"><img src="https://dabuttonfactory.com/button.png?t=Open+Gitpod&f=Open+Sans-Bold&ts=16&tc=fff&hp=20&vp=10&c=11&bgt=unicolored&bgc=0b5394" /></a>
-
-#### `✅.setup-02`- Create your Astra Account: 
+#### `✅.setup-01`- Create your Astra Account: 
 
 The Astra registration page should have opened with Gitpod, if not use [this link](https://astra.datastax.com)
 
 
-#### `✅.setup-03`- Create Astra Credentials (token): Create an application token by following <a href="https://awesome-astra.github.io/docs/pages/astra/create-token/" target="_blank">these instructions</a>. 
+#### `✅.setup-02`- Create Astra Credentials (token): Create an application token by following <a href="https://awesome-astra.github.io/docs/pages/astra/create-token/" target="_blank">these instructions</a>. 
 
 Skip this step is you already have a token. You can reuse the same token in our other workshops, too.
 
 > Your token should look like: `AstraCS:....`
 
+#### `✅.setup-03`- Open Gitpod
+
+Gitpod is an IDE based on VSCode deployed in the cloud.
+
+> ↗️ _Right Click and select open as a new Tab..._
+
+<a href="https://gitpod.io/#https://github.com/datastaxdevs/workshop-swinburne"><img src="https://dabuttonfactory.com/button.png?t=Open+Gitpod&f=Open+Sans-Bold&ts=16&tc=fff&hp=20&vp=10&c=11&bgt=unicolored&bgc=0b5394" /></a>
+
 #### `✅.setup-04`- Setup Astra CLI
 
-Go back to your gitpod terminal waiting for your token. Make sure you select the `1_producer` shell in the bottom-right panel and provide the value where it is asked.
-
-![pic](images/pic-astratoken.png)
+When the gitpod open you are asked to provide a TOKEN:
 
 > 🖥️ `setup-04 output`
 >
@@ -136,7 +133,7 @@ astra db get workshops
 > | Default Keyspace       | sensor_data                             |
 > | Creation Time          | 2022-08-29T06:13:06Z                    |
 > |                        |                                         |
-> | Keyspaces              | [0] trollsquad                          |
+> | Keyspaces              | [0] sensor_data                         |
 > |                        |                                         |
 > |                        |                                         |
 > | Regions                | [0] us-east-1                           |
@@ -145,3 +142,119 @@ astra db get workshops
 > ```
 
 *Congratulations your environment is all set, let's start the labs !*
+
+## LAB1. Setup your Astra DB instance
+
+#### ✅ 5a) Start the CQL shell and connect to database `workshops` and keyspace `sensor_data`:
+
+```
+astra db cqlsh workshops -k sensor_data
+```
+
+> 🖥️ Output
+>
+> ```
+> [ INFO ] - Cqlsh has been installed
+> 
+> Cqlsh is starting please wait for connection establishment...
+> Connected to cndb at 127.0.0.1:9042.
+> [cqlsh 6.8.0 | Cassandra 4.0.0.6816 | CQL spec 3.4.5 | Native protocol v4]
+> Use HELP for help.
+> token@cqlsh:sensor_data> 
+> ```
+
+#### ✅ 5b) Initialize the Schema with `cqlsh`
+
+We want to initialize the following schema
+
+
+```sql
+CREATE TABLE IF NOT EXISTS networks (
+  bucket          TEXT,
+  name            TEXT,
+  description     TEXT,
+  region          TEXT,
+  num_sensors     INT,
+  PRIMARY KEY ((bucket), name)
+);
+
+CREATE TABLE IF NOT EXISTS temperatures_by_network (
+  network TEXT,
+  week DATE,
+  date_hour TIMESTAMP,
+  sensor TEXT,
+  avg_temperature FLOAT,
+  latitude DECIMAL,
+  longitude DECIMAL,
+  PRIMARY KEY ((network,week),date_hour,sensor)
+) WITH CLUSTERING ORDER BY (date_hour DESC, sensor ASC);
+
+CREATE TABLE IF NOT EXISTS sensors_by_network (
+  network TEXT,
+  sensor TEXT,
+  latitude DECIMAL,
+  longitude DECIMAL,
+  characteristics MAP<TEXT,TEXT>,
+  PRIMARY KEY ((network),sensor)
+);
+
+CREATE TABLE IF NOT EXISTS temperatures_by_sensor (
+  sensor TEXT,
+  date DATE,
+  timestamp TIMESTAMP,
+  value FLOAT,
+  PRIMARY KEY ((sensor,date),timestamp)
+) WITH CLUSTERING ORDER BY (timestamp DESC);
+```
+
+#### Launch the initialization script
+
+```
+astra db cqlsh workshops -f initialize.cql
+```
+
+Now you can copy-paste any of the queries below and execute them with the `Enter` key:
+
+```
+-- Q1 (note 'all' is the only partition key in this table)
+SELECT  name, description, region, num_sensors
+FROM    networks
+WHERE   bucket = 'all';
+
+-- Q2
+SELECT  date_hour, avg_temperature, latitude, longitude, sensor 
+FROM    temperatures_by_network
+WHERE   network    = 'forest-net'
+  AND   week       = '2020-07-05'
+  AND   date_hour >= '2020-07-05'
+  AND   date_hour  < '2020-07-07';
+
+-- Q3
+SELECT  *
+FROM    sensors_by_network
+WHERE   network = 'forest-net';
+
+-- Q4
+SELECT  timestamp, value 
+FROM    temperatures_by_sensor
+WHERE   sensor = 's1003'
+  AND   date   = '2020-07-06';
+```
+
+To close `cqlsh` and get back to the shell prompt, execute the `EXIT` command.
+
+</details>
+
+#### Download the Secure Connect Bundle
+
+Besides the "Client ID" and the "Client Secret" from the Token, the drivers
+also need the "Secure Connect Bundle" zipfile to work (it contains proxy
+and routing information as well as the necessary certificates).
+
+To download it:
+
+```
+astra db download-scb -f secure-connect-workshops.zip workshops
+```
+
+You can check it has been saved with `ls *.zip`.

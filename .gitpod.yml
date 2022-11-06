@@ -1,10 +1,11 @@
 tasks:
-  - name: ASTRA
+  - name: WORKSHOP
     before: |
+      sdk install micronaut
       printf 'export PATH="$HOME%s:$PATH"\n' "/.astra/cli" >> $HOME/.bashrc
       printf 'unset JAVA_TOOL_OPTIONS\n' >> $HOME/.bashrc
-      curl -Ls "https://dtsx.io/get-astra-cli" | bash >> ./install.log
-    init: | 
+      curl -Ls "https://dtsx.io/get-astra-cli-alpha5" | bash >> ./install.log
+    init: |
       cd /workspace/workshop-swinburne
     command: |
       unset JAVA_TOOL_OPTIONS
