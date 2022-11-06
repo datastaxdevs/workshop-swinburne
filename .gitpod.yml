@@ -1,0 +1,27 @@
+tasks:
+  - name: ASTRA
+    before: |
+      printf 'export PATH="$HOME%s:$PATH"\n' "/.astra/cli" >> $HOME/.bashrc
+      printf 'unset JAVA_TOOL_OPTIONS\n' >> $HOME/.bashrc
+      curl -Ls "https://dtsx.io/get-astra-cli" | bash >> ./install.log
+    init: | 
+      cd /workspace/workshop-swinburne
+    command: |
+      unset JAVA_TOOL_OPTIONS
+      source /home/gitpod/.astra/cli/astra-init.sh
+      astra setup
+ports:
+  - port: 8080
+    onOpen: open-browser
+    visibility: public
+  
+github:
+  prebuilds:
+    master: true
+    branches: true
+    pullRequests: true
+    pullRequestsFromForks: false
+    addCheck: true
+    addComment: false
+    addBadge: true
+    addLabel: false

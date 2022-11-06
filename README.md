@@ -1,4 +1,4 @@
-## 🎓 Workshop NoSQL to discover Apache Cassandra™ and AstraDB
+## 🎓 Workshop NoSQL: Apache Cassandra™ and AstraDB
 
 [![Discord](https://img.shields.io/discord/685554030159593522)](https://discord.com/widget?id=685554030159593522&theme=dark)
 
