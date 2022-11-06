@@ -14,16 +14,8 @@
 
 ## 📋 Table of contents
 
-- **Objectives**
-  - [Objectives](#objectives)
-  - [Frequently asked questions](#frequently-asked-questions)
-  - [Materials for the Session](#materials-for-the-session)
-- **Architecture Design**
-  - [Architecture overview](#architecture-overview)
-  - [Injector Component](#injector-component)
-  - [Analyzer Component](#analyzer-component)
 - [Setup - Initialize your environment](#setup---initialize-your-environment)
-- [LAB1 - Producer and Consumer](#lab1---producer-and-consumer)
+- [LAB1 - First CQL Queries](#lab1-first-cql-queries)
 - [LAB2 - Pulsar functions](#lab2---pulsar-functions)
 - [LAB3 - Working with Database](#lab3---working-with-databases)
 - [LAB4 - Pulsar I/O](#lab4---pulsar-io)
@@ -145,7 +137,7 @@ astra db get workshops
 
 *Congratulations your environment is all set, let's start the labs !*
 
-## LAB2. First CQL Queries
+## LAB1. First CQL Queries
 
 #### ✅ Launch the initialization script
 
@@ -367,7 +359,7 @@ WHERE sensor='s1002';
 
 Suprise !
 
-## LAB3. DataModel
+## LAB2. DataModel
 
 ```sql
 CREATE TABLE IF NOT EXISTS networks (
