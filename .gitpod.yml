@@ -1,16 +1,17 @@
 tasks:
   - name: WORKSHOP
     before: |
-      sdk install micronaut
       printf 'export PATH="$HOME%s:$PATH"\n' "/.astra/cli" >> $HOME/.bashrc
       printf 'unset JAVA_TOOL_OPTIONS\n' >> $HOME/.bashrc
-      curl -Ls "https://dtsx.io/get-astra-cli-alpha5" | bash >> ./install.log
+      curl -Ls "https://dtsx.io/get-astra-cli-alpha6" | bash >> ./install.log
     init: |
+      sed -i '1,$s/sdkman_auto_answer=false/sdkman_auto_answer=true/' /home/gitpod/.sdkman/etc/config 
+      sed -i '1,$s/sdkman_selfupdate_enable=true/sdkman_selfupdate_enable=false/' /home/gitpod/.sdkman/etc/config 
+      sdk install java 22.1.0.r11-grl -y
       cd /workspace/workshop-swinburne
     command: |
       unset JAVA_TOOL_OPTIONS
       source /home/gitpod/.astra/cli/astra-init.sh
-      astra setup
 ports:
   - port: 8080
     onOpen: open-browser

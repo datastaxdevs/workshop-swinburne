@@ -113,7 +113,7 @@ Let's analyze the command:
 >[ INFO ] - Database 'workshops' has status 'ACTIVE' (took 7983 millis)
 > ```
 
-#### `✅.setup-08`- Get the informations for your database including the keyspace list
+#### `✅.setup-07`- Get the informations for your database including the keyspace list
 
 ```bash
 astra db get workshops
