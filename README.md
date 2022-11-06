@@ -253,7 +253,7 @@ VALUES ('volcano-net','s2002',44.463195,-110.830124,
        {'accuracy':'high','sensitivity':'medium'});    
 ```
 
-#### ✅ Step 6c. C(R)UD = read = read data
+#### ✅ C(R)UD = read = read data
 
 Now that we've inserted a set of rows (two sets, to be precise), let's take a look at how to read the data back out. This is done with a **SELECT** statement. In its simplest form we could just execute a statement like the following **_**cough_** **_**cough_**:
 
@@ -429,7 +429,7 @@ To close `cqlsh` and get back to the shell prompt, execute the `EXIT` command.
 
 ## LAB4. Coding Java and Python
 
-#### Download the Secure Connect Bundle
+#### ✅ Download the Secure Connect Bundle
 
 Besides the "Client ID" and the "Client Secret" from the Token, the drivers also need the "Secure Connect Bundle" zipfile to work (it contains proxy and routing information as well as the necessary certificates). To download it:
 
@@ -439,7 +439,7 @@ astra db download-scb -f secure-connect-workshops.zip workshops
 
 You can check it has been saved with `ls *.zip`.
 
-#### Configure the dot-env file
+#### ✅ Configure the dot-env file
 
 Copy the template dot-env and edit it with:
 
@@ -455,4 +455,9 @@ Finally, `source` the .env file:
 source .env
 ```
 
+Choose your path:
+
+[![](https://awesome-astra.github.io/docs/img/tile-python.png)](python/Python_README.md)
+
+[![](https://awesome-astra.github.io/docs/img/tile-java.png)](java/Java_README.md)
 
