@@ -11,9 +11,12 @@ You will be running the following steps from the command line.
 
 ### Setup
 
-First `cd python`
+First place yourself to the proper folder and install requirements.
 
-Install packages, `pip install -r requirements.txt`
+```
+cd python
+pip install -r requirements.txt
+```
 
 The core module is `db_connection.py` which provides a (Singleton) Cassandra
 session for use by the rest of the code. Take a minute to [inspect that](db_connection.py).

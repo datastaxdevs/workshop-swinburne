@@ -425,7 +425,11 @@ WHERE   sensor = 's1003'
   AND   date   = '2020-07-06';
 ```
 
-To close `cqlsh` and get back to the shell prompt, execute the `EXIT` command.
+To close `cqlsh` and get back to the shell prompt.
+
+```
+exit
+```
 
 ## LAB4. Coding Java and Python
 

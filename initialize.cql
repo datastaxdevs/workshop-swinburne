@@ -50,44 +50,6 @@ CREATE TABLE IF NOT EXISTS temperatures_by_sensor (
 ) WITH CLUSTERING ORDER BY (timestamp DESC);
 
 
--- Populate table networks:
----------------------------
-INSERT INTO networks 
-(bucket,name,description,region,num_sensors)
-VALUES ('all','forest-net',
-        'forest fire detection network',
-        'south',3);
-INSERT INTO networks 
-(bucket,name,description,region,num_sensors)
-VALUES ('all','volcano-net',
-        'volcano monitoring network',
-        'north',2);   
-
-
--- Populate table sensors_by_network:
--------------------------------------
-INSERT INTO sensors_by_network 
-(network,sensor,latitude,longitude,characteristics)
-VALUES ('forest-net','s1001',30.526503,-95.582815,
-       {'accuracy':'medium','sensitivity':'high'});
-INSERT INTO sensors_by_network 
-(network,sensor,latitude,longitude,characteristics)
-VALUES ('forest-net','s1002',30.518650,-95.583585,
-       {'accuracy':'medium','sensitivity':'high'});     
-INSERT INTO sensors_by_network 
-(network,sensor,latitude,longitude,characteristics)
-VALUES ('forest-net','s1003',30.515056,-95.556225,
-       {'accuracy':'medium','sensitivity':'high'});     
-INSERT INTO sensors_by_network 
-(network,sensor,latitude,longitude,characteristics)
-VALUES ('volcano-net','s2001',44.460321,-110.828151,
-       {'accuracy':'high','sensitivity':'medium'});    
-INSERT INTO sensors_by_network 
-(network,sensor,latitude,longitude,characteristics)
-VALUES ('volcano-net','s2002',44.463195,-110.830124,
-       {'accuracy':'high','sensitivity':'medium'});      
-
-
 -- Populate table temperatures_by_network:
 ------------------------------------------
 INSERT INTO temperatures_by_network 
