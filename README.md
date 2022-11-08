@@ -23,15 +23,20 @@
 
 ## LAB1 - Initialize your environment
 
-#### `✅.setup-01`- Create your Astra Account: 
+#### `✅.setup-01`- Create your Astra Account
 
-The Astra registration page should have opened with Gitpod, if not use [this link](https://astra.datastax.com)
+> ↗️ _Right Click and select open as a new Tab..._
+    
+<a href="[https://gitpod.io/#https://github.com/datastaxdevs/workshop-swinburne](https://astra.datastax.com)"><img src="https://dabuttonfactory.com/button.png?t=Astra+Sigin+or+SignUp&f=Open+Sans-Bold&ts=16&tc=fff&hp=20&vp=10&c=11&bgt=unicolored&bgc=0b5394" /></a>
 
+#### `✅.setup-02`- Create Astra Credentials (token) following this walkthrough
 
-#### `✅.setup-02`- Create Astra Credentials (token): Create an application token by following <a href="https://awesome-astra.github.io/docs/pages/astra/create-token/" target="_blank">these instructions</a>. 
+> [Full documentation](https://awesome-astra.github.io/docs/pages/astra/create-token).
 
 Skip this step is you already have a token. You can reuse the same token in our other workshops, too.
-
+    
+![](https://awesome-astra.github.io/docs/img/astra/astra-create-token.gif)
+    
 > Your token should look like: `AstraCS:....`
 
 #### `✅.setup-03`- Open Gitpod
@@ -92,7 +97,7 @@ astra user list
 > +--------------------------------------+-----------------------------+---------------------+
 > ```
 
-#### `✅.setup-06`- Create database `workshops` and keyspace `trollsquad` if they do not exist:
+#### `✅.setup-06`- Create database `workshops` and keyspace `sensor_data` if they do not exist:
 
 ```bash
 astra db create workshops -k sensor_data --if-not-exist --wait
