@@ -23,13 +23,13 @@
 
 ## LAB1 - Initialize your environment
 
-#### `✅.setup-01`- Create your Astra Account
+#### `✅.lab1.01`- Create your Astra Account
 
 > ↗️ _Right Click and select open as a new Tab..._
     
 <a href="[https://gitpod.io/#https://github.com/datastaxdevs/workshop-swinburne](https://astra.datastax.com)"><img src="https://dabuttonfactory.com/button.png?t=Astra+Sigin+or+SignUp&f=Open+Sans-Bold&ts=16&tc=fff&hp=20&vp=10&c=11&bgt=unicolored&bgc=0b5394" /></a>
 
-#### `✅.setup-02`- Create Astra Credentials (token) following this walkthrough
+#### `✅.lab1.02`- Create Astra Credentials (token)
 
 > [Full documentation](https://awesome-astra.github.io/docs/pages/astra/create-token).
 
@@ -39,17 +39,15 @@ Skip this step is you already have a token. You can reuse the same token in our 
     
 > Your token should look like: `AstraCS:....`
 
-#### `✅.setup-03`- Open Gitpod
-
-Gitpod is an IDE based on VSCode deployed in the cloud.
+#### `✅.lab1.03`- Open Gitpod IDE (VS Code in the cloud)
 
 > ↗️ _Right Click and select open as a new Tab..._
 
 <a href="https://gitpod.io/#https://github.com/datastaxdevs/workshop-swinburne"><img src="https://dabuttonfactory.com/button.png?t=Open+Gitpod&f=Open+Sans-Bold&ts=16&tc=fff&hp=20&vp=10&c=11&bgt=unicolored&bgc=0b5394" /></a>
 
-#### `✅.setup-04`- Setup Astra CLI
+#### `✅.lab1.04`- Setup Astra CLI
 
-- Enter the command
+- In Gitpod in a terminal enter the command:
 
 ```
 astra setup
@@ -74,20 +72,20 @@ $ Enter an Astra token:
 +<ENTER_TOKEN_HERE>
 ```
 
-> 🖥️ `setup-04 output`
+> 🖥️ `output`
 >
 > ```
 > [OK]    Configuration has been saved.
 > [OK]     Enter 'astra help' to list available commands.
 > ```
 
-#### `✅.setup-05`- List your existing Users.
+#### `✅.lab1.05`- List your existing Users.
 
 ```bash
 astra user list
 ```
 
-> 🖥️ `setup-05 output`
+> 🖥️ `output`
 >
 > ```
 > +--------------------------------------+-----------------------------+---------------------+
@@ -97,7 +95,7 @@ astra user list
 > +--------------------------------------+-----------------------------+---------------------+
 > ```
 
-#### `✅.setup-06`- Create database `workshops` and keyspace `sensor_data` if they do not exist:
+#### `✅.lab1.06`- Create database `workshops` and keyspace `sensor_data` if they do not exist:
 
 ```bash
 astra db create workshops -k sensor_data --if-not-exist --wait
@@ -114,7 +112,7 @@ Let's analyze the command:
 
 > **Note**: If the database already exist but has not been used for while the status will be `HIBERNATED`. The previous command will resume the db an create the new keyspace but it can take about a minute to execute.
 
-> 🖥️ `setup-06 output`
+> 🖥️ `output`
 >
 > ```
 > [INFO]  Database 'workshops' does not exist. Creating database 'workshops' with keyspace 'sensor_data'
@@ -124,13 +122,13 @@ Let's analyze the command:
 > [OK]    Database 'workshops' is ready.
 > ```
 
-#### `✅.setup-07`- Get the informations for your database including the keyspace list
+#### `✅.lab1.07`- Get the informations for your database including the keyspace list
 
 ```bash
 astra db get workshops
 ```
 
-> 🖥️ `setup-08 output`
+> 🖥️ `output`
 >
 > ```
 > +------------------------+-----------------------------------------+
@@ -156,7 +154,7 @@ astra db get workshops
 
 ## LAB2. First CQL Queries
 
-#### ✅ Launch the initialization script
+#### `✅.lab2.01`- Launch the initialization script
 
 ```
 astra db cqlsh workshops -f initialize.cql
@@ -164,13 +162,13 @@ astra db cqlsh workshops -f initialize.cql
 
 Now you can copy-paste any of the queries below and execute them with the `Enter` key:
 
-#### ✅ Start the CQL shell and connect to database `workshops` and keyspace `sensor_data`:
+#### `✅.lab2.02`- Start the CQL shell and connect to database `workshops` and keyspace `sensor_data`:
 
 ```
 astra db cqlsh workshops -k sensor_data
 ```
 
-> 🖥️ Output
+> 🖥️ `Output`
 >
 > ```
 > [INFO]  Downloading Cqlshell, please wait...
@@ -184,18 +182,15 @@ astra db cqlsh workshops -k sensor_data
 > token@cqlsh:sensor_data> 
 > ```
 
-
 CRUD stands for "**create, read, update, and delete**". Simply put, they are the basic types of commands you need to work with ANY database in order to maintain data for your applications.
 
-#### ✅ (C)RUD = create = insert data, users
+#### `✅.lab2.03`- Create (Insert) some basic DATA in a table
 
 Our tables are in place so let's put some data in them. This is done with the **INSERT** statement. We'll start by inserting 2 rows into the **_networks_** table.
 
 Copy and paste the following in your CQL Console:
 _(Once you have carefully examined the first of the following **INSERT** statements below, you can simply copy/paste the others which are very similar.)_
-
-📘 **Commands to execute**
-
+    
 ```sql
 INSERT INTO networks 
 (bucket,name,description,region,num_sensors)
@@ -209,15 +204,13 @@ VALUES ('all','volcano-net',
         'north',2);    
 ```
 
-#### ✅ Step 6b. (C)RUD = create = insert data, posts
+#### `✅.lab2.04`- Insert collections data
 
 Let's run some more **INSERT** statements, this time for **sensors**. We'll insert data into the **_sensors_by_network_** table.
 
 _(Once you have carefully examined the first of the following **INSERT** statements below, you can simply copy/paste the others which are very similar.)_
 
 > _Note_: in the following, we are using `MAP<>` which lets you define you our key/value mapping, thereby adding a bit of flexibility -- Cassandra Data models are strongly typed.
-
-📘 **Commands to execute**
 
 ```sql
 INSERT INTO sensors_by_network 
@@ -242,14 +235,8 @@ VALUES ('volcano-net','s2002',44.463195,-110.830124,
        {'accuracy':'high','sensitivity':'medium'});     
 ```
 
-Ok, we have a lovely bunch of sensors in our application.
-
-Now let's add temperature measurements in table **_temperatures_by_sensors_** as well! Let's do it with the following command (please note that the `INSERT` statements are similar to the ones seen above, with different columns and table name):
-
-> _Note_: In a relational database you may have use a join on 3 tables `Networks > Sensors > Temperatures`. In the following, we are putting back the network name in temperature table and this is because it will be required in the where clause.
-
-📘 **Commands to execute**
-
+#### `✅.lab2.05`- Insert data in `sensors_by_network`
+    
 ```sql
 INSERT INTO sensors_by_network 
 (network,sensor,latitude,longitude,characteristics)
@@ -273,10 +260,12 @@ VALUES ('volcano-net','s2002',44.463195,-110.830124,
        {'accuracy':'high','sensitivity':'medium'});    
 ```
 
-#### ✅ C(R)UD = read = read data
+#### `✅.lab2.05`- Read data from network
 
 Now that we've inserted a set of rows (two sets, to be precise), let's take a look at how to read the data back out. This is done with a **SELECT** statement. In its simplest form we could just execute a statement like the following **_**cough_** **_**cough_**:
 
+> ⚠️ _this is a first sample, select * with no WHERE is almost forbidden as will perform a full scan of your cluster_
+    
 ```sql
 SELECT * FROM networks;
 ```
