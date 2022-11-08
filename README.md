@@ -31,9 +31,9 @@
 
 #### `✅.lab1.02`- Create Astra Credentials (token)
 
-> [Full documentation](https://awesome-astra.github.io/docs/pages/astra/create-token).
+> **Note**: Skip this step is you already have a token. You can reuse the same token in our other workshops, too.
 
-Skip this step is you already have a token. You can reuse the same token in our other workshops, too.
+> [Full documentation](https://awesome-astra.github.io/docs/pages/astra/create-token).
     
 ![](https://awesome-astra.github.io/docs/img/astra/astra-create-token.gif)
     
@@ -101,7 +101,10 @@ astra user list
 astra db create workshops -k sensor_data --if-not-exist --wait
 ```
 
-Let's analyze the command:
+> **Note**: If the database already exist but has not been used for while the status will be `HIBERNATED`. The previous command will resume the db an create the new keyspace but it can take about a minute to execute.
+    
+- **Command Informations**
+    
 | Chunk         | Description     |
 |--------------|-----------|
 | `db create` | Operation executed `create` in group `db`  |
@@ -109,8 +112,6 @@ Let's analyze the command:
 |`-k sensor_data` | Name of the keyspace, a db can contains multiple keyspaces |
 | `--if-not-exist` | Flag for itempotency creating only what if needed |
 | `--wait` | Make the command blocking until all expected operations are executed (timeout is 180s) |
-
-> **Note**: If the database already exist but has not been used for while the status will be `HIBERNATED`. The previous command will resume the db an create the new keyspace but it can take about a minute to execute.
 
 > 🖥️ `output`
 >
@@ -150,19 +151,17 @@ astra db get workshops
 > +------------------------+-----------------------------------------+
 > ```
 
-*Congratulations your environment is all set, let's start the labs !*
-
-## LAB2. First CQL Queries
+## LAB2. Discovering Cassandra Query Language
 
 #### `✅.lab2.01`- Launch the initialization script
-
+    
 ```
 astra db cqlsh workshops -f initialize.cql
 ```
+    
+> **Note**: The command above will create a few tables for you to learn about Create, read update, delete. We will go into more details of a tables structure in the `lab3`.
 
-Now you can copy-paste any of the queries below and execute them with the `Enter` key:
-
-#### `✅.lab2.02`- Start the CQL shell and connect to database `workshops` and keyspace `sensor_data`:
+#### `✅.lab2.02`- Open CQL shell in interactive mode:
 
 ```
 astra db cqlsh workshops -k sensor_data
@@ -182,15 +181,8 @@ astra db cqlsh workshops -k sensor_data
 > token@cqlsh:sensor_data> 
 > ```
 
-CRUD stands for "**create, read, update, and delete**". Simply put, they are the basic types of commands you need to work with ANY database in order to maintain data for your applications.
+#### `✅.lab2.03`- Create (Insert) some basic data
 
-#### `✅.lab2.03`- Create (Insert) some basic DATA in a table
-
-Our tables are in place so let's put some data in them. This is done with the **INSERT** statement. We'll start by inserting 2 rows into the **_networks_** table.
-
-Copy and paste the following in your CQL Console:
-_(Once you have carefully examined the first of the following **INSERT** statements below, you can simply copy/paste the others which are very similar.)_
-    
 ```sql
 INSERT INTO networks 
 (bucket,name,description,region,num_sensors)
@@ -206,11 +198,7 @@ VALUES ('all','volcano-net',
 
 #### `✅.lab2.04`- Insert collections data
 
-Let's run some more **INSERT** statements, this time for **sensors**. We'll insert data into the **_sensors_by_network_** table.
-
-_(Once you have carefully examined the first of the following **INSERT** statements below, you can simply copy/paste the others which are very similar.)_
-
-> _Note_: in the following, we are using `MAP<>` which lets you define you our key/value mapping, thereby adding a bit of flexibility -- Cassandra Data models are strongly typed.
+> **Note**: in the following, we are using `MAP<>` which lets you define you our key/value mapping, thereby adding a bit of flexibility -- Cassandra Data models are strongly typed.
 
 ```sql
 INSERT INTO sensors_by_network 
