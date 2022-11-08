@@ -44,21 +44,36 @@ Gitpod is an IDE based on VSCode deployed in the cloud.
 
 #### `✅.setup-04`- Setup Astra CLI
 
-When the gitpod open you are asked to provide a TOKEN:
+- Enter the command
+
+```
+astra setup
+```
+
+- You are asked to provide a TOKEN:
+
+```diff
+    _____            __                  
+   /  _  \   _______/  |_____________    
+  /  /_\  \ /  ___/\   __\_  __ \__  \  
+ /    |    \\___ \  |  |  |  | \// __ \_ 
+ \____|__  /____  > |__|  |__|  (____  /
+         \/     \/                   \/ 
+           Version: 0.1.1
+
+ -----------------------
+ ---      SETUP      ---
+ -----------------------
+
+$ Enter an Astra token:
++<ENTER_TOKEN_HERE>
+```
 
 > 🖥️ `setup-04 output`
 >
 > ```
-> [cedrick.lunven@gmail.com]
-> ASTRA_DB_APPLICATION_TOKEN=AstraCS:AAAAAAAA
-> 
-> [What's NEXT ?]
-> You are all set.(configuration is stored in ~/.astrarc) You can now:
->    • Use any command, 'astra help' will get you the list
->    • Try with 'astra db list'
->    • Enter interactive mode using 'astra'
-> 
-> Happy Coding !
+> [OK]    Configuration has been saved.
+> [OK]     Enter 'astra help' to list available commands.
 > ```
 
 #### `✅.setup-05`- List your existing Users.
