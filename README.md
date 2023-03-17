@@ -14,24 +14,20 @@
 - [LAB2 - First CQL Queries](#lab2-first-cql-queries)
 - [LAB3 - Data Modeling](#lab3-datamodel)
 - [LAB4 - Coding](#lab4-coding-java-and-python)
+- [LAB5 - Stargate APIS](#lab4-coding-java-and-python)
 <p>
 
-
-## 1. Initialize your environment
+## LAB1. Initializing environment
 
 ### 1.1 - Create an Astra Account
 
 > **Note**: **Datastax Astra** is a cloud-native, fully managed database-as-a-service (DBaaS) based on Apache Cassandra. It provides a scalable, performant and highly available database solution without the operational overhead of managing Cassandra clusters. Astra supports both SQL and NoSQL APIs, and includes features like backup and restore, monitoring and alerting, and access control. It enables developers to focus on application development while the database infrastructure is managed by Datastax.
 
-- `✅ 1.1.a` - Access [https://astra.datastax.com](https://astra.dev/yt-03-08) and register with `Google` or `Github` account
+- `✅ 1.1.a` - Access [https://astra.datastax.com](https://astra.datastax.com) and register with `Google` or `Github` account
 
-![](img/astra-login.png?raw=true")
+![](images/astra-login.png?raw=true")
 
 ### 1.2 - Create an Astra Token
-
-```diff
-- ⚠️ NOT MANDATORY DURING THE LIVE WORKSHOP
-```
 
 - `✅ 1.2.a` Locate `Settings` (#1) in the menu on the left, then `Token Management` (#2)
 
@@ -43,14 +39,13 @@
 
 ![](https://github.com/DataStax-Academy/cassandra-for-data-engineers/blob/main/images/setup-astra-3.png?raw=true)
 
-
 ### 1.3 - Open your Environment
 
 > **Note**: **Gitpod** is a cloud-based integrated development environment (IDE) that allows developers to build, test and run applications directly in their web browser. It provides preconfigured dev environments for GitHub projects, so developers can start coding immediately without setting up local environment. Gitpod saves time and streamlines the development process.
 
 > `✅ 1.3.a` ↗️ _Right Click and select open as a new Tab..._
 >
-> [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/datastaxdevs/workshop-betterreads)
+> [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/datastaxdevs/workshop-swinburne)
 
 ### 1.4 - Setup Astra CLI
 
@@ -496,9 +491,160 @@ Finally, `source` the .env file:
 source .env
 ```
 
-Choose your path:
+Choose your Language:
 
-[![](https://awesome-astra.github.io/docs/img/tile-python.png)](python/Python_README.md)
+[![](https://awesome-astra.github.io/docs/img/tile-python.png)](python/Python_README.md)     [![](https://awesome-astra.github.io/docs/img/tile-java.png)](java/Java_README.md)
 
-[![](https://awesome-astra.github.io/docs/img/tile-java.png)](java/Java_README.md)
+## LAB5. Stargate Apis
 
+### 5.1 - Open Swagger
+
+- `✅ 5.1.a` - Open Connect TAB
+
+![image](images/open-connect-tab.png?raw=true)
+
+- `✅ 5.1.a` - Open Swagger UI
+
+![image](images/open-swagger-ui.png?raw=true)
+
+
+### 5.2 - Rest Operations
+
+-  ✅ `5.2.a` List keyspaces
+
+![image](images/swagger-list-keyspace.png?raw=true)
+
+- Click `Try it out`
+- Click on `Execute`
+
+-  ✅ `5.2.b` List Tables
+
+![image](images/swagger-list-tables.png?raw=true)
+
+- Click `Try it out`
+- keyspace: `sensor_data`
+- Click on `Execute`
+
+-  ✅ `5.2.c` Read multiple rows
+
+![image](images/swagger-listrows.png?raw=true)
+
+- keyspaceName: `sensor_data`
+- tableName: `users`
+- Click Execute
+
+- Notice how now you can only limited return fields
+
+- fields: `firstname, lastname`
+
+
+### 5.3 - Open Astra GraphQL
+
+The application will use the GraphQL Api to interact with the database, let us have a look at this API.
+
+- `✅ .4.a` - Locate Playground, in the `Connect` Tab by scrolling down and clicking graphQL
+
+![](images/astra-graphql-1.png?raw=true")
+
+- `✅ 2.4.b` - There click on the `GraphQL Playground` link.
+
+![](images/astra-graphql-2.png?raw=true")
+
+- `✅ 2.4.c` - List Keyspaces in db `workshop`
+
+In the left part of the screen enter the following request and validate with the Big triangle button in the middle (play)
+
+```yaml
+query getAllKeyspaces{ 
+  keyspaces {
+    name 
+  } 
+}
+```
+
+> `Output`
+> ![](images/gql-list-keyspaces.png?raw=true")
+> 
+### 5.4 - GraphQL Operations
+
+
+- `✅ 2.6.a` - Display documentation by click on the `DOCS` panel totally on the right of the playground.
+
+![](img/gql-documentation.png?raw=true")
+
+
+- `✅ 2.6.b` - Display the table list of the keyspace `ethereum`
+
+```yaml
+query getEthereumKeyspaceTables {
+  keyspace(name:"ethereum") {
+    name
+    tables {
+      name
+      columns {
+        name
+        kind
+        type {
+          basic
+          info {
+            name
+          }
+        }
+      }
+    } 
+  }
+}
+```
+
+- `✅ 2.6.b` - Open a new  TAB and call it `DATA` and provide a new URL
+
+```
+https://4ac96264-a997-47ee-9cad-c97ba836bc6f-us-west-2.apps.astra.datastax.com/api/graphql/ethereum
+```
+
+![](img/astra-graphql-3.png?raw=true")
+
+
+- `✅ 2.6.c` - Upload the header if needed with
+
+```json
+{
+  "x-cassandra-token": "AstraCS:NTUZWFSHzJFPbNSfHEsiWgoN:8117739d5965d24f0bf23951857a97338d3b049b0761d5bce5cbe6e2e36b2944"
+}
+```
+
+- `✅ 2.6.d` - List content of table `tokens`,
+
+```yaml
+query getTokenByAddress {
+  tokens(value:{address:"0xc14ca0805194dc4a1319dcad80352d8033763b92"}) {
+    values {
+      address
+      block_number
+      block_timestamp
+      decimals
+      symbol
+    }
+  }
+}
+```
+
+> `Output`
+> ![](img/gql-gettokens.png?raw=true")
+> ```yaml
+> {
+>   "data": {
+>     "tokens": {
+>       "values": [
+>         {
+>           "address": "0xc14ca0805194dc4a1319dcad80352d8033763b92",
+>           "block_number": "6949212",
+>           "block_timestamp": "2018-12-25T08:24:03.000Z",
+>           "decimals": 18,
+>           "symbol": "WJL"
+>         }
+>       ]
+>     }
+>   }
+> }
+> ```
