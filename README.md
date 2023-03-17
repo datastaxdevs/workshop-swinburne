@@ -191,7 +191,7 @@ astra db get workshops
 #### `✅.lab2.01`- Launch the initialization script
     
 ```
-astra db cqlsh workshops -f initialize.cql
+astra db cqlsh workshops -f /workspace/workshop-swinburne/initialize.cql
 ```
     
 > **Note**: The command above will create a few tables for you to learn about Create, read update, delete. We will go into more details of a tables structure in the `lab3`.
@@ -542,15 +542,15 @@ Choose your Language:
 
 The application will use the GraphQL Api to interact with the database, let us have a look at this API.
 
-- `✅ .4.a` - Locate Playground, in the `Connect` Tab by scrolling down and clicking graphQL
+- `✅ 5.3.a` - Locate Playground, in the `Connect` Tab by scrolling down and clicking graphQL
 
 ![](images/astra-graphql-1.png?raw=true")
 
-- `✅ 2.4.b` - There click on the `GraphQL Playground` link.
+- `✅ 5.3.b` - There click on the `GraphQL Playground` link.
 
 ![](images/astra-graphql-2.png?raw=true")
 
-- `✅ 2.4.c` - List Keyspaces in db `workshop`
+- `✅ 5.3.c` - List Keyspaces in db `workshop`
 
 In the left part of the screen enter the following request and validate with the Big triangle button in the middle (play)
 
@@ -567,17 +567,15 @@ query getAllKeyspaces{
 > 
 ### 5.4 - GraphQL Operations
 
+- `✅ 5.4.a` - Display documentation by click on the `DOCS` panel totally on the right of the playground.
 
-- `✅ 2.6.a` - Display documentation by click on the `DOCS` panel totally on the right of the playground.
+![](images/gql-documentation.png?raw=true")
 
-![](img/gql-documentation.png?raw=true")
-
-
-- `✅ 2.6.b` - Display the table list of the keyspace `ethereum`
+- `✅ 5.4.b` - Display the table list of the keyspace `sensor_data`
 
 ```yaml
-query getEthereumKeyspaceTables {
-  keyspace(name:"ethereum") {
+query getSensporDataKeyspaceTables {
+  keyspace(name:"sensor_data") {
     name
     tables {
       name
@@ -596,55 +594,32 @@ query getEthereumKeyspaceTables {
 }
 ```
 
-- `✅ 2.6.b` - Open a new  TAB and call it `DATA` and provide a new URL
+- `✅ 5.4.d` - Open second tab
 
-```
-https://4ac96264-a997-47ee-9cad-c97ba836bc6f-us-west-2.apps.astra.datastax.com/api/graphql/ethereum
-```
+In the url change `system` by `sensor_data`
 
-![](img/astra-graphql-3.png?raw=true")
-
-
-- `✅ 2.6.c` - Upload the header if needed with
-
-```json
-{
-  "x-cassandra-token": "AstraCS:NTUZWFSHzJFPbNSfHEsiWgoN:8117739d5965d24f0bf23951857a97338d3b049b0761d5bce5cbe6e2e36b2944"
-}
-```
-
-- `✅ 2.6.d` - List content of table `tokens`,
+- `✅ 5.4.d` - List content of table `network`,
 
 ```yaml
-query getTokenByAddress {
-  tokens(value:{address:"0xc14ca0805194dc4a1319dcad80352d8033763b92"}) {
-    values {
-      address
-      block_number
-      block_timestamp
-      decimals
-      symbol
-    }
+query getNetworks {
+  networks(value:{}) {
+   values {
+    name
+   }
   }
 }
 ```
 
 > `Output`
-> ![](img/gql-gettokens.png?raw=true")
 > ```yaml
 > {
->   "data": {
->     "tokens": {
->       "values": [
->         {
->           "address": "0xc14ca0805194dc4a1319dcad80352d8033763b92",
->           "block_number": "6949212",
->           "block_timestamp": "2018-12-25T08:24:03.000Z",
->           "decimals": 18,
->           "symbol": "WJL"
->         }
->       ]
->     }
+>  "data": {
+>   "networks": {
+>    "values": [
+>     { "name": "forest-net" },
+>     { "name": "volcano-net" }
+>    ]
 >   }
+>  }
 > }
 > ```
