@@ -2,14 +2,11 @@
 
 [![Discord](https://img.shields.io/discord/685554030159593522)](https://discord.com/widget?id=685554030159593522&theme=dark)
 
-
-⏲️ **Duration :** 3 hours
+⏲️ **Duration :** 3h30 hours
 
 🎓 **Level** Beginner to Intermediate
 
 ![](images/splash.png)
-
-> [🔖 Accessing HANDS-ON](#-start-hands-on)
 
 ## 📋 Table of contents
 
@@ -19,67 +16,93 @@
 - [LAB4 - Coding](#lab4-coding-java-and-python)
 <p>
 
-# 🏁 Start Hands-on
 
-## LAB1 - Initialize your environment
+## 1. Initialize your environment
 
-#### `✅.lab1.01`- Create your Astra Account
+### 1.1 - Create an Astra Account
 
-> ↗️ _Right Click and select open as a new Tab..._
-    
-<a href="[https://gitpod.io/#https://github.com/datastaxdevs/workshop-swinburne](https://astra.datastax.com)"><img src="https://dabuttonfactory.com/button.png?t=Astra+Sigin+or+SignUp&f=Open+Sans-Bold&ts=16&tc=fff&hp=20&vp=10&c=11&bgt=unicolored&bgc=0b5394" /></a>
+> **Note**: **Datastax Astra** is a cloud-native, fully managed database-as-a-service (DBaaS) based on Apache Cassandra. It provides a scalable, performant and highly available database solution without the operational overhead of managing Cassandra clusters. Astra supports both SQL and NoSQL APIs, and includes features like backup and restore, monitoring and alerting, and access control. It enables developers to focus on application development while the database infrastructure is managed by Datastax.
 
-#### `✅.lab1.02`- Create Astra Credentials (token)
+- `✅ 1.1.a` - Access [https://astra.datastax.com](https://astra.dev/yt-03-08) and register with `Google` or `Github` account
 
-> **Note**: Skip this step is you already have a token. You can reuse the same token in our other workshops, too.
+![](img/astra-login.png?raw=true")
 
-> [Full documentation](https://awesome-astra.github.io/docs/pages/astra/create-token).
-    
-![](https://awesome-astra.github.io/docs/img/astra/astra-create-token.gif)
-    
-> Your token should look like: `AstraCS:....`
-
-#### `✅.lab1.03`- Open Gitpod IDE (VS Code in the cloud)
-
-> ↗️ _Right Click and select open as a new Tab..._
-
-<a href="https://gitpod.io/#https://github.com/datastaxdevs/workshop-swinburne"><img src="https://dabuttonfactory.com/button.png?t=Open+Gitpod&f=Open+Sans-Bold&ts=16&tc=fff&hp=20&vp=10&c=11&bgt=unicolored&bgc=0b5394" /></a>
-
-#### `✅.lab1.04`- Setup Astra CLI
-
-- In Gitpod in a terminal enter the command:
-
-```
-astra setup
-```
-
-- You are asked to provide a TOKEN:
+### 1.2 - Create an Astra Token
 
 ```diff
-    _____            __                  
-   /  _  \   _______/  |_____________    
-  /  /_\  \ /  ___/\   __\_  __ \__  \  
- /    |    \\___ \  |  |  |  | \// __ \_ 
- \____|__  /____  > |__|  |__|  (____  /
-         \/     \/                   \/ 
-           Version: 0.1.1
+- ⚠️ NOT MANDATORY DURING THE LIVE WORKSHOP
+```
 
- -----------------------
- ---      SETUP      ---
- -----------------------
+- `✅ 1.2.a` Locate `Settings` (#1) in the menu on the left, then `Token Management` (#2)
 
-$ Enter an Astra token:
-+<ENTER_TOKEN_HERE>
+- `✅ 1.2.b`Select the role `Organization Administrator` before clicking `[Generate Token]`
+
+![](https://github.com/DataStax-Academy/cassandra-for-data-engineers/blob/main/images/setup-astra-2.png?raw=true)
+
+- `✅ 1.2.c` - Copy your token in the clipboard. With this token we will now create what is needed for the training.
+
+![](https://github.com/DataStax-Academy/cassandra-for-data-engineers/blob/main/images/setup-astra-3.png?raw=true)
+
+
+### 1.3 - Open your Environment
+
+> **Note**: **Gitpod** is a cloud-based integrated development environment (IDE) that allows developers to build, test and run applications directly in their web browser. It provides preconfigured dev environments for GitHub projects, so developers can start coding immediately without setting up local environment. Gitpod saves time and streamlines the development process.
+
+> `✅ 1.3.a` ↗️ _Right Click and select open as a new Tab..._
+>
+> [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/datastaxdevs/workshop-betterreads)
+
+### 1.4 - Setup Astra CLI
+
+> **Note**:  The **Astra CLI** is a command-line interface (CLI) tool for managing Apache Cassandra databases hosted on Datastax Astra. It allows developers to perform tasks like creating and managing databases, executing Cassandra queries, and managing security and access control. The Astra CLI simplifies database management and provides an alternative to the Astra web interface, enabling automation and integration with other tools and workflows.
+
+- `✅ 1.4.a` **Locate the terminal called `setup` and check that the CLI is available**
+
+```
+astra --version
 ```
 
 > 🖥️ `output`
 >
 > ```
-> [OK]    Configuration has been saved.
-> [OK]     Enter 'astra help' to list available commands.
+> $ astra --version
+> 0.2.1
 > ```
 
-#### `✅.lab1.05`- List your existing Users.
+- `✅ 1.4.b` **Trigger the setup command**
+
+```
+astra setup
+```
+
+> 🖥️ `output`
+>
+> ```
+>     _____            __                  
+>    /  _  \   _______/  |_____________    
+>   /  /_\  \ /  ___/\   __\_  __ \__  \  
+>  /    |    \\___ \  |  |  |  | \// __ \_ 
+>  \____|__  /____  > |__|  |__|  (____  /
+>          \/     \/                   \/ 
+>            Version: 0.2.1
+> 
+>  -----------------------
+>  ---      SETUP      ---
+>  -----------------------
+> 
+> $ Enter an Astra token:
+> ```
+
+- `✅ 1.4.c` **Provide your token as asked (starting witg AstraCS:..)**
+
+> 🖥️ `output`
+>
+> ```
+> [OK]    Configuration has been saved.
+> [OK]    Enter 'astra help' to list available commands.
+> ```
+
+- `✅ 1.4.d` **List your existing Users.**
 
 ```bash
 astra user list
@@ -95,35 +118,52 @@ astra user list
 > +--------------------------------------+-----------------------------+---------------------+
 > ```
 
-#### `✅.lab1.06`- Create database `workshops` and keyspace `sensor_data` if they do not exist:
+### 1.5 - Create database
+
+- `✅ 1.5.a` **Create database `workshops` with keyspace `sensor_data`**
 
 ```bash
-astra db create workshops -k sensor_data --if-not-exist --wait
+astra db create workshops -k sensor_data --if-not-exist
 ```
 
-> **Note**: If the database already exist but has not been used for while the status will be `HIBERNATED`. The previous command will resume the db an create the new keyspace but it can take about a minute to execute.
-    
-- **Command Informations**
-    
+> 🖥️ `Output`
+>
+> ```
+> [ INFO ] - Database 'workshops' already exist. Connecting to database.
+> [ INFO ] - Database 'workshops' has status 'MAINTENANCE' waiting to be 'ACTIVE' ...
+>[ INFO ] - Database 'workshops' has status 'ACTIVE' (took 7983 millis)
+> ```
+
 | Chunk         | Description     |
 |--------------|-----------|
 | `db create` | Operation executed `create` in group `db`  |
 | `workshops` | Name of the database, our argument |
 |`-k sensor_data` | Name of the keyspace, a db can contains multiple keyspaces |
 | `--if-not-exist` | Flag for itempotency creating only what if needed |
-| `--wait` | Make the command blocking until all expected operations are executed (timeout is 180s) |
+
+> **Note**: If the database already exist but has not been used for while the status will be `HIBERNATED`. The previous command will resume the db an create the new keyspace but it can take about a minute to execute.
+>
+> ```
+> [OK]    Resuming Database 'com.dtsx.astra.sdk.db.domain.Database@406005b3' ...
+> [INFO]  Database 'workshops' has status 'RESUMING' waiting to be 'ACTIVE' ...
+> [INFO]  Database 'workshops' has status 'ACTIVE' (took 41466 millis)
+> [INFO]  Keyspace  'workshops' already exists. Connecting to keyspace.
+> [OK]    Database 'workshops' is ready.
+> ```
+
+- `✅ 1.5.b` **Check the status of database `workshops`**
+
+```bash
+astra db status workshops
+```
 
 > 🖥️ `output`
 >
 > ```
-> [INFO]  Database 'workshops' does not exist. Creating database 'workshops' with keyspace 'sensor_data'
-> [INFO]  Database 'workshops' and keyspace 'sensor_data' are being created.
-> [INFO]  Database 'workshops' has status 'PENDING' waiting to be 'ACTIVE' ...
-> [INFO]  Database 'workshops' has status 'ACTIVE' (took 87975 millis)
-> [OK]    Database 'workshops' is ready.
+> [ INFO ] - Database 'workshops' has status 'ACTIVE'
 > ```
 
-#### `✅.lab1.07`- Get the informations for your database including the keyspace list
+- `✅ 1.5.c` **Get the information for your database including the keyspace list**
 
 ```bash
 astra db get workshops
@@ -136,20 +176,20 @@ astra db get workshops
 > | Attribute              | Value                                   |
 > +------------------------+-----------------------------------------+
 > | Name                   | workshops                               |
-> | id                     | bb61cfd6-2702-4b19-97b6-3b89a04c9be7    |
+> | id                     | 906ef2f2-07d0-472c-add6-fe719cf61d02    |
 > | Status                 | ACTIVE                                  |
-> | Default Cloud Provider | AWS                                     |
-> | Default Region         | us-east-1                               |
+> | Default Cloud Provider | GCP                                     |
+> | Default Region         | us-east1                                |
 > | Default Keyspace       | sensor_data                             |
-> | Creation Time          | 2022-08-29T06:13:06Z                    |
+> | Creation Time          | 2023-02-20T12:06:21Z                    |
 > |                        |                                         |
 > | Keyspaces              | [0] sensor_data                         |
 > |                        |                                         |
-> |                        |                                         |
-> | Regions                | [0] us-east-1                           |
-> |                        |                                         |
+> | Regions                | [0] us-east1                            |
 > +------------------------+-----------------------------------------+
 > ```
+
+[🏠 Back to Table of Contents](#-table-of-content)
 
 ## LAB2. Discovering Cassandra Query Language
 
