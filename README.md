@@ -10,11 +10,11 @@
 
 ## 📋 Table of contents
 
-- [LAB1 - Initialize your environment](#lab1---initialize-your-environment)
-- [LAB2 - First CQL Queries](#lab2-first-cql-queries)
+- [LAB1 - Initialize your environment](#lab1-initializing-environment)
+- [LAB2 - First CQL Queries](#lab2-discovering-cassandra-query-language)
 - [LAB3 - Data Modeling](#lab3-datamodel)
 - [LAB4 - Coding](#lab4-coding-java-and-python)
-- [LAB5 - Stargate APIS](#lab4-coding-java-and-python)
+- [LAB5 - Stargate APIS](#lab5-stargate-apis)
 <p>
 
 ## LAB1. Initializing environment
